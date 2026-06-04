@@ -190,7 +190,7 @@ sections.append((
     '传统的数据分析方法难以应对海量数据的存储和计算需求，'
     '而Apache Spark作为新一代大数据处理框架，以其内存计算和丰富的机器学习库，'
     '为大规模推荐系统的实现提供了高效的技术支撑。'
-), 'body'))
+, 'body'))
 sections.append(('1.2 问题描述', 2))
 sections.append((
     '本课题要求设计并实现一个基于Spark的电商用户行为分析与推荐系统。'
@@ -200,7 +200,7 @@ sections.append((
     '（4）基于Spark MLlib实现ALS协同过滤推荐算法，为每个用户生成个性化推荐；'
     '（5）实现数据可视化展示，包括趋势图、分布图、漏斗图等。'
     '所有数据分析任务需在Linux系统环境下完成，使用Python和PySpark进行开发。'
-), 'body'))
+, 'body'))
 sections.append(('1.3 设计目标', 2))
 sections.append((
     '本系统的具体设计目标如下：（1）数据规模：生成不少于10万条用户行为记录，'
@@ -208,7 +208,7 @@ sections.append((
     '（3）分析维度：完成至少8项数据分析，包括核心指标、趋势分析、行为分布、转化漏斗、'
     '商品热度、类别销售、时段分析和用户分层；（4）推荐效果：ALS模型RMSE小于2.0，'
     '为全部用户生成个性化Top-5推荐；（5）可视化：输出不少于6张高质量图表。'
-), 'body'))
+, 'body'))
 
 # ---- 2. 总体设计 ----
 sections.append(('2 总体设计', 1))
@@ -223,7 +223,7 @@ sections.append((
     '推荐引擎层基于Spark MLlib的ALS算法构建协同过滤推荐模型。'
     '可视化展示层使用Matplotlib生成静态图表，并通过Flask搭建Web交互界面。'
     '系统各层之间通过标准化的数据接口进行交互，保证了模块的独立性和可维护性。'
-), 'body'))
+, 'body'))
 sections.append(('2.2 技术路线', 2))
 sections.append((
     '系统选用以下技术栈：（1）编程语言：Python 3.6，使用PySpark API进行Spark编程；'
@@ -236,7 +236,7 @@ sections.append((
     '（7）Web框架：Flask轻量级Web框架。'
     '选择Spark作为核心框架的主要原因是其内存计算能力强、API丰富、'
     '内置MLlib机器学习库，能够一站式完成数据处理、分析和建模的全流程。'
-), 'body'))
+, 'body'))
 sections.append(('2.3 系统流程图', 2))
 sections.append((
     '系统整体流程如下：'
@@ -247,7 +247,7 @@ sections.append((
     '（5）推荐建模：将用户行为转换为评分矩阵，使用ALS算法训练模型，生成Top-5推荐；'
     '（6）数据可视化：生成8张分析图表；'
     '（7）Web展示：通过Flask搭建Web仪表盘。'
-), 'body'))
+, 'body'))
 
 # ---- 3. 详细设计 ----
 sections.append(('3 详细设计', 1))
@@ -262,7 +262,7 @@ sections.append((
     '随机生成用户行为记录，时间范围为2024年1月至6月；'
     '（4）save_to_csv()：将数据保存为CSV格式，包含8个字段。'
     '最终生成的数据量为100,000条（≥1万条），文件大小7.66MB。'
-), 'body'))
+, 'body'))
 sections.append(('3.2 数据预处理模块（02_preprocess.py）', 2))
 sections.append((
     '数据预处理模块基于PySpark DataFrame API实现。主要处理步骤包括：'
@@ -273,7 +273,7 @@ sections.append((
     '（4）特征工程：使用to_timestamp()解析时间戳，提取date、hour、dayofweek、month四个时间特征，'
     '使用StringIndexer对behavior_type进行编码；'
     '（5）数据保存：使用write.parquet()将清洗后数据保存为Parquet列式存储格式。'
-), 'body'))
+, 'body'))
 sections.append(('3.3 Spark SQL分析模块（03_spark_sql_analysis.py）', 2))
 sections.append((
     'Spark SQL分析模块共包含10项分析任务：'
@@ -287,7 +287,7 @@ sections.append((
     '（8）地域分布分析：按user_region统计用户数、GMV、ARPU值；'
     '（9）用户价值分层：基于购买次数将用户分为四类；'
     '（10）商品关联分析：通过自连接发现跨类别购买模式。'
-), 'body'))
+, 'body'))
 sections.append(('3.4 ALS推荐算法模块（04_als_recommendation.py）', 2))
 sections.append((
     'ALS推荐算法模块基于Spark MLlib实现。主要流程为：'
@@ -301,7 +301,7 @@ sections.append((
     '（7）结果持久化：模型和推荐结果分别保存为Parquet文件。'
     'ALS算法的核心思想是通过梯度下降交替优化用户矩阵U和商品矩阵V，'
     '使得U×V^T尽可能逼近原始评分矩阵R，从而预测用户对未交互商品的评分。'
-), 'body'))
+, 'body'))
 sections.append(('3.5 可视化模块（05_visualization.py）', 2))
 sections.append((
     '可视化模块使用Matplotlib和Pandas生成8张分析图表：'
@@ -312,7 +312,7 @@ sections.append((
     '所有图表以PNG格式输出，并将数据导出为JSON供ECharts前端使用。'
     '此外，基于Flask框架搭建了Web可视化系统（web/app.py），'
     '提供数据仪表盘和个性化推荐查询两个页面。'
-), 'body'))
+, 'body'))
 
 # ---- 4. 程序运行结果测试与分析 ----
 sections.append(('4 程序运行结果测试与分析', 1))
@@ -324,7 +324,7 @@ sections.append((
     '数据包含5,000名用户、2,000件商品、10个商品类别，'
     '时间跨度为2024年1月1日至2024年6月30日共181天。'
     '数据字段完整，分布合理，符合真实电商场景的行为模式。'
-), 'body'))
+, 'body'))
 sections.append(('4.2 数据预处理结果', 2))
 sections.append((
     '运行步骤2（02_preprocess.py）对原始数据进行了全面清洗。'
@@ -334,7 +334,7 @@ sections.append((
     '并对behavior_type进行了数值编码。'
     '清洗后数据以Parquet格式保存，压缩后大小为2.9MB（原始CSV 7.66MB，压缩率62%）。'
     '用户行为统计显示，活跃度最高的5个用户平均有37次行为和33个活跃天数。'
-), 'body'))
+, 'body'))
 sections.append(('4.3 Spark SQL分析结果', 2))
 sections.append((
     '运行步骤3（03_spark_sql_analysis.py）获得10项分析结果：'
@@ -345,7 +345,7 @@ sections.append((
     '（5）用户分层：普通用户（2-4次购买）53.68%，单次购买27.36%，未购买13.76%，中等价值（5-9次）5.20%；'
     '（6）关联分析：美妆护肤与食品饮料共现用户最多（201人），服装与电子次之（201人）。'
     '以上结果表明系统能够有效挖掘用户行为的潜在规律。'
-), 'body'))
+, 'body'))
 sections.append(('4.4 ALS推荐结果', 2))
 sections.append((
     '运行步骤4（04_als_recommendation.py）完成ALS模型训练和推荐生成。'
@@ -358,7 +358,7 @@ sections.append((
     '以USER_02402为例，推荐Top-5包含ITEM_01741（预测评分4.57）、'
     'ITEM_01180（4.45）、ITEM_01594（4.38）、ITEM_00127（4.38）、ITEM_01916（4.38），'
     '模型能够有效区分用户对不同商品的偏好强度。'
-), 'body'))
+, 'body'))
 sections.append(('4.5 可视化结果', 2))
 sections.append((
     '运行步骤5（05_visualization.py）成功生成8张PNG格式图表：'
@@ -371,7 +371,7 @@ sections.append((
     '图7（地域GMV）对比不同地区销售额贡献；'
     '图8（用户价值分层）展示五类用户分布。'
     '图表以300DPI分辨率保存，可在论文中清晰呈现。'
-), 'body'))
+, 'body'))
 
 # ---- 5. 结论与心得 ----
 sections.append(('5 结论与心得', 1))
@@ -384,7 +384,7 @@ sections.append((
     '北京、深圳等一线城市是GMV贡献最大的地区。'
     'ALS协同过滤推荐模型达到RMSE 1.57的性能水平，'
     '为5,000名用户成功生成了个性化推荐，证明了基于Spark MLlib的大规模推荐系统的技术可行性。'
-), 'body'))
+, 'body'))
 sections.append(('5.2 问题与改进方向', 2))
 sections.append((
     '在系统开发和实验过程中，发现了以下可改进之处：'
@@ -394,7 +394,7 @@ sections.append((
     '（3）实时处理：当前为批处理架构，未来可引入Spark Streaming实现动态推荐更新；'
     '（4）冷启动问题：可结合基于内容的推荐或热门推荐策略解决新用户/新商品的冷启动问题；'
     '（5）可视化交互：可增加更多交互式分析功能，如自定义时间范围、多维度下钻等。'
-), 'body'))
+, 'body'))
 sections.append(('5.3 学习心得', 2))
 sections.append((
     '通过本次大数据技术综合实验的课程设计，我深入学习和实践了以下内容：'
@@ -408,7 +408,7 @@ sections.append((
     'ALS参数调优以及中文可视化字体配置等，通过查阅官方文档和社区资源逐一解决。'
     '本次实验让我认识到，大数据技术不仅仅是工具的使用，更重要的是对数据的理解'
     '和对业务场景的洞察，只有将技术与业务需求有机结合，才能发挥大数据的真正价值。'
-), 'body'))
+, 'body'))
 
 # ---- 参考文献 ----
 sections.append(('参考文献', 1))
