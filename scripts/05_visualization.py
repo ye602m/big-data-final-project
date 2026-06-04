@@ -15,7 +15,8 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import numpy as np
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, count, sum as spark_sum, desc, hour, month
+from pyspark.sql.functions import col, count, countDistinct, sum as spark_sum, desc, hour, month
+import pandas as pd
 import json
 
 # ==================== 中文字体设置 ====================
