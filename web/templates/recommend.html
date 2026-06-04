@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个性化推荐查询</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: #f0f2f5; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                  color: white; padding: 15px 0; text-align: center; }
+        .container { max-width: 900px; margin: 30px auto; }
+        .search-box { background: white; border-radius: 12px; padding: 30px;
+                      box-shadow: 0 2px 12px rgba(0,0,0,0.08); text-align: center; }
+        .search-box input { padding: 12px 20px; width: 300px; border: 2px solid #ddd;
+                            border-radius: 8px; font-size: 16px; }
+        .search-box button { padding: 12px 30px; background: #667eea; color: white;
+                             border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-left: 10px; }
+        .search-box button:hover { background: #5a6fd6; }
+        .results { margin-top: 20px; }
+        .rec-card { background: white; border-radius: 12px; padding: 20px; margin: 15px 0;
+                    box-shadow: 0 2px 12px rgba(0,0,0,0.08); display: flex; align-items: center; }
+        .rec-rank { font-size: 32px; font-weight: bold; color: #667eea; width: 60px; text-align: center; }
+        .rec-info { flex: 1; }
+        .rec-info h4 { font-size: 18px; margin-bottom: 5px; }
+        .rec-info p { color: #666; font-size: 14px; }
+        .rec-rating { font-size: 24px; font-weight: bold; color: #e74c3c; text-align: center; width: 80px; }
+        .rec-rating small { font-size: 12px; color: #999; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 个性化推荐查询</h1>
+        <p>ALS 协同过滤 | 基于用户历史行为的智能推荐</p>
+    </div>
+    <div class="container">
+        <div class="search-box">
+            <h3>输入用户ID查询推荐结果</h3>
+            <input type="text" id="userId" placeholder="例如: USER_00001" value="USER_00001">
+            <button onclick="search()">🔍 查询推荐</button>
+        </div>
+        <div class="results" id="results">
+            <p style="text-align:center; color:#999; margin-top:30px;">👆 输入用户ID查看个性化推荐结果</p>
+        </div>
+    </div>
+    <script>
+        function search() {
+            const userId = document.getElementById('userId').value;
+            fetch('/api/recommendations?user_id=' + userId)
+                .then(res => res.json())
+                .then(data => {
+                    const resultsDiv = document.getElementById('results');
+                    if (data.recommendations && data.recommendations.length > 0) {
+                        resultsDiv.innerHTML = '<h3 style="margin-bottom:15px;">📋 为用户 <strong>' + data.user_id + '</strong> 推荐的 Top-5 商品:</h3>'
+                            + data.recommendations.map((r, i) => `
+                                <div class="rec-card">
+                                    <div class="rec-rank">#${i+1}</div>
+                                    <div class="rec-info">
+                                        <h4>${r.item_id} <span style="background:#f0f0f0;padding:2px 8px;border-radius:4px;font-size:12px;">${r.category}</span></h4>
+                                        <p>${r.reason}</p>
+                                    </div>
+                                    <div class="rec-rating">${r.predicted_rating}<br><small>预测评分</small></div>
+                                </div>
+                            `).join('');
+                    } else {
+                        resultsDiv.innerHTML = '<p style="text-align:center; color:#e74c3c;">未找到该用户的推荐结果</p>';
+                    }
+                });
+        }
+        window.onload = search;
+    </script>
+</body>
+</html>
