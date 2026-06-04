@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.env
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Spark
+metastore_db/
+derby.log
+spark-warehouse/
+
+# Hadoop/HDFS
+tmp/
+
+# Large data files (use Git LFS or store separately)
+*.parquet
+*.orc
+*.avro
+data/*.csv
+data/*.json
+
+# Logs
+*.log
+logs/
+
+# Word temp files
+~$*.docx
+~$*.doc
+*.tgz
+*.gz
+doc_output.txt
